@@ -7,20 +7,31 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --inspect src/index.js",
-    "watch": "node-sass --watch src/resources/scss/ --output src/public/css/"
+    "watch": "node-sass --watch src/resources/scss/ --output src/public/css/"  
   },
   "keywords": [
     "nodejs"
   ],
   "author": "hieuph",
   "license": "ISC",
+  "lint-staged": {
+    "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all --write"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "dependencies": {
     "express": "^4.18.2",
     "express-handlebars": "^7.0.2",
     "nodemon": "^2.0.21"
   },
   "devDependencies": {
+    "husky": "^4.3.8",
+    "lint-staged": "^13.2.0",
     "morgan": "^1.10.0",
-    "node-sass": "^8.0.0"
+    "node-sass": "^8.0.0",
+    "prettier": "^2.8.4"
   }
 }
