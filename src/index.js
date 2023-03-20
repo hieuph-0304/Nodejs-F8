@@ -3,7 +3,13 @@ import express from 'express';
 import morgan from 'morgan';
 import { engine } from 'express-handlebars';
 import { fileURLToPath } from 'url';
+
 import { route } from './routes/index.js';
+import * as db from './config/db/index.js';
+
+// connect to mongodb
+db.connect();
+
 const app = express();
 const port = 3000;
 
@@ -30,12 +36,12 @@ app.engine(
 app.set('view engine', 'hbs');
 app.set(
   'views',
-  path.join(path.dirname(fileURLToPath(import.meta.url)), 'resources/views'),
+  path.join(path.dirname(fileURLToPath(import.meta.url)), 'resources', 'views'),
 );
 
 // Route init
 route(app);
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`App listening on port ${port}`);
 });
