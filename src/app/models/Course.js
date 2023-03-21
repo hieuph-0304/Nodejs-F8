@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 import slug from 'mongoose-slug-generator';
-mongoose.plugin(slug);
+import mongooseDelete from 'mongoose-delete';
 
 const CourseSchema = new Schema(
   {
@@ -15,6 +15,12 @@ const CourseSchema = new Schema(
   },
   { timestamps: true },
 );
+
+mongoose.plugin(slug);
+CourseSchema.plugin(mongooseDelete, {
+  deletedAt: true,
+  overrideMethods: 'all',
+});
 
 const Course = mongoose.model('Course', CourseSchema);
 export { Course };
